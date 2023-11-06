@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+main {
+  @apply h-full;
+  @apply h-min;
+  @apply flex;
+  @apply flex-col;
+  @apply justify-center;
+}
