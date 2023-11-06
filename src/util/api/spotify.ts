@@ -14,7 +14,7 @@ export const fetchSpotify = async (code: string) => {
     data: {
       grant_type: "authorization_code",
       code: code,
-      redirect_uri: "http://localhost:3000/callback",
+      redirect_uri: env.NEXT_PUBLIC_SPOTIFY_REDIRECT,
     },
   });
 
