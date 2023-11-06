@@ -15,7 +15,6 @@ const spotifyApi = new Spotify();
 
 const Home: NextPage<{ code?: string }, {}> = ({ code }) => {
   const [name, setName] = useState("");
-  const [username, setUsername] = useState("");
   const [songs, setSongs] = useState<Row[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -48,13 +47,6 @@ const Home: NextPage<{ code?: string }, {}> = ({ code }) => {
           value={name}
           placeholder="Listedeki ismin"
         />
-        <input
-          type="text"
-          className="rounded-md border p-2 transition-all"
-          onChange={(e) => setUsername(e.target.value)}
-          value={username}
-          placeholder="Spotify kullanıcı adın"
-        />
         <button
           disabled={isLoading}
           className="rounded-md border border-red-500 bg-white px-4 py-2 text-red-500 transition-all hover:bg-red-500 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
@@ -76,7 +68,9 @@ const Home: NextPage<{ code?: string }, {}> = ({ code }) => {
                 });
               });
 
-              const { id } = await spotifyApi.createPlaylist(username, {
+              const { id: userId } = await spotifyApi.getMe();
+
+              const { id } = await spotifyApi.createPlaylist(userId, {
                 name: name + " Gece Listesi",
               });
 
